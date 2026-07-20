@@ -23,7 +23,7 @@
             "homepage": "http://knplabs.com"
         },
         {
-            "name":     "The contributors",
+            "name": "The contributors",
             "homepage": "http://github.com/Gaufrette/extras/contributors"
         }
     ],
@@ -43,7 +43,7 @@
         }
     },
     "scripts": {
-      "phpspec": "phpspec run",
-      "phpunit": "phpunit"
+        "phpspec": "phpspec run",
+        "phpunit": "phpunit"
     }
 }
