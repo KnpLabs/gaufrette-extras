@@ -16,7 +16,7 @@ trait AwsS3SetUpTearDownTrait
     /** @var S3Client */
     private $client;
 
-    public function setUp()
+    public function setUp(): void
     {
         $key    = getenv('AWS_KEY');
         $secret = getenv('AWS_SECRET');
@@ -30,12 +30,14 @@ trait AwsS3SetUpTearDownTrait
 
         // For AWS SDK v2
         if (class_exists('Aws\Common\Client\AbstractClient')) {
-            return $this->client = S3Client::factory([
+            $this->client = S3Client::factory([
                 'region' => $region ? $region : 'eu-west-1',
                 'version' => '2006-03-01',
                 'key' => $key,
                 'secret' => $secret,
             ]);
+
+            return;
         }
 
         // For AWS SDK v3
@@ -49,7 +51,7 @@ trait AwsS3SetUpTearDownTrait
         ]);
     }
 
-    public function tearDown()
+    public function tearDown(): void
     {
         if ($this->client === null || !$this->client->doesBucketExist($this->bucket)) {
             return;
