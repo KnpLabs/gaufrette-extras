@@ -1,0 +1,38 @@
+name: Tests
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron:  '0 0 1 * *'
+
+concurrency:
+  cancel-in-progress: true
+  group: ${{ github.repository }}/${{ github.workflow }}/${{ github.ref_name }}
+
+jobs:
+  tests:
+    name: Tests
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1', '8.2', '8.3', '8.4', '8.5']
+        script:
+          - phpunit
+          - phpspec
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+
+      - name: Install dependencies
+        run: composer update --prefer-dist --no-progress --no-suggest --ansi
+
+      - name: Run PHPUnit tests
+        run: composer ${{ matrix.script }}

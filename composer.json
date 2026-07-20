@@ -1,14 +1,16 @@
 {
-    "name": "gaufrette/extras",
+    "name": "knplabs/gaufrette-extras",
     "description": "Provides extra features (prefixed fs, resolvable fs) to Gaufrette",
     "type": "library",
     "require": {
-        "knplabs/gaufrette": "~0.4"
+        "php": "^7.4 || ^8.0",
+        "knplabs/gaufrette": "^0.11"
     },
     "require-dev": {
-        "phpspec/phpspec": "^3.4",
-        "phpunit/phpunit": "~5.5",
-        "aws/aws-sdk-php": "~2.4|~3"
+        "aws/aws-sdk-php": "~2.4|~3",
+        "phpspec/phpspec": "^7.0 || ^8.0",
+        "phpunit/phpunit": "^9||^10||^11||^12||^13",
+        "symfony/phpunit-bridge": "^5.4 || ^6.4 || ^7.0"
     },
     "license": "MIT",
     "authors": [
@@ -27,7 +29,8 @@
     ],
     "minimum-stability": "stable",
     "config": {
-        "bin-dir": "bin/"
+        "bin-dir": "bin/",
+        "sort-packages": true
     },
     "autoload": {
         "psr-4": {
@@ -38,5 +41,9 @@
         "psr-4": {
             "Gaufrette\\Extras\\Tests\\": "tests/"
         }
+    },
+    "scripts": {
+      "phpspec": "phpspec run",
+      "phpunit": "phpunit"
     }
 }
